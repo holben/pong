@@ -20,7 +20,19 @@ int interval = 1000 / 60;
 //score
 int score_left = 0;
 int score_right = 0;
-
+std::string int2str(int  x)
+{
+	//converts int to string
+	std::stringstream ss;
+	ss << x;
+	return ss.str();
+}
+//draws text on screen
+void drawText(float x, float y, std::string text)
+{
+	glRasterPos2f(x, y);
+	glutBitmapString(GLUT_BITMAP_8_BY_13, (const unsigned char*)text.c_str());
+}
 //draws the board
 void draw()
 {
@@ -29,16 +41,11 @@ void draw()
 	glLoadIdentity();
 	//Draw the scene
 	//draw score
-	drawText(width / 2 - 10, height - 15, score_left + ":");
+	drawText(width / 2 - 10, height - 15, int2str(score_left) + ":" + int2str(score_right));
 	//swap buffers
 	glutSwapBuffers();
 }
-//draws text on screen
-void drawText(float x, float y, std::string text)
-{
-	glRasterPos2f(x, y);
-	glutBitmapString(GLUT_BITMAP_8_BY_13, (const unsigned char*)text.c_str());
-}
+
 //updates the board
 void update(int value)
 {
